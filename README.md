@@ -75,7 +75,7 @@ Diving into Variables, Types, and Methods (38–64)
 		- [ ] Define a simple method with parameters
 		- [ ] Add a return type and return some data from a method
 		- [ ] Use data returned from a method
-- [ ] ✏️ Explain some differences between public and private variables: **??**
+- [ ] ✏️ Explain some differences between public and private variables: Public variables are visible in Inspector and we can see and change them in Unity’s Inspector window. We can access public variables everywhere: other scripts can read and change them. Private variables are hidden in Inspector and we can’t see them in Unity’s Inspector. We can only use them inside the script and other scripts can’t touch them, only the script that owns them can.
 
 
 ## Chapter 4
