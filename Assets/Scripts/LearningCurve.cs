@@ -3,7 +3,7 @@ using UnityEngine;
 
 /// <summary>
 /// Demonstrates variables, access modifiers, string formatting,
-/// conditionals, collections, and loops in Unity.
+/// conditionals, collections, loops, and OOP concepts in Unity.
 /// </summary>
 public class LearningCurve : MonoBehaviour
 {
@@ -101,6 +101,45 @@ public class LearningCurve : MonoBehaviour
         foreach (KeyValuePair<string, int> entry in scores)
         {
             Debug.Log($"Player: {entry.Key}, Score: {entry.Value}");
+        }
+
+        // ======================================================
+        // --- CLASSES, STRUCTS, CHILD CLASSES, AND REFERENCES ---
+        // ======================================================
+
+        // --- CLASSES ---
+        Debug.Log("Value types (int, float, bool) store the data itself. Assigning or passing them copies the value. Changing the copy doesn’t affect the original.");
+        Debug.Log("Reference types (classes, arrays) store a reference (pointer) to data on the heap. Assigning or passing them copies the reference, so multiple variables can refer to the same underlying object.");
+
+        // Instantiate two Character objects
+        Character hero = new Character("Lancelot", 5);
+        Character heroine = new Character("Guinevere", 4);
+        hero.PrintStatsInfo();
+        heroine.PrintStatsInfo();
+
+        // --- STRUCTS ---
+        Weapon huntingBow = new Weapon("Hunting Bow", 25);
+        Weapon warBow = new Weapon("War Bow", 40);
+        huntingBow.PrintWeaponStats();
+        warBow.PrintWeaponStats();
+
+        // --- CHILD CLASS ---
+        Paladin knight = new Paladin("Arthur", 7, warBow);
+        knight.PrintStatsInfo();
+
+        // --- REFERENCING OBJECTS ---
+        Transform cameraTransform = GetComponent<Transform>();
+        Debug.Log($"Main Camera position: {cameraTransform.localPosition}");
+
+        GameObject lightGameObject = GameObject.Find("Directional Light");
+        if (lightGameObject != null)
+        {
+            Transform lightTransform = lightGameObject.GetComponent<Transform>();
+            Debug.Log($"Light position: {lightTransform.localPosition}");
+        }
+        else
+        {
+            Debug.LogWarning("Directional Light not found in scene!");
         }
     }
 
