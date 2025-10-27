@@ -77,15 +77,28 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    // Detect triggers (like cubes)
+    // --- COLLISIONS AND TRIGGERS ---
     void OnTriggerEnter(Collider other)
     {
         Debug.Log("Entered trigger: " + other.name);
 
+        // Collect cubes (items)
         if (other.CompareTag("Cube"))
         {
             Destroy(other.gameObject);
-            Debug.Log("Cube destroyed!");
+            Debug.Log("Cube collected!");
+            
+            // Add to GameManager item count
+            if (GameManager.Instance != null)
+                GameManager.Instance.Items++;
+        }
+
+        // Health pickup example
+        if (other.CompareTag("Health"))
+        {
+            Destroy(other.gameObject);
+            if (GameManager.Instance != null)
+                GameManager.Instance.Health++;
         }
     }
 
@@ -94,9 +107,15 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log("Exited trigger: " + other.name);
     }
 
-    // Detect physical collisions
     void OnCollisionEnter(Collision collision)
     {
         Debug.Log("Collided with: " + collision.gameObject.name);
+
+        // Example: lose health if colliding with "Obstacle"
+        if (collision.gameObject.CompareTag("Obstacle") && GameManager.Instance != null)
+        {
+            GameManager.Instance.Health--;
+            Debug.Log("Ouch! Health now: " + GameManager.Instance.Health);
+        }
     }
 }
